@@ -1,5 +1,5 @@
 default: md1
-	md1 kakis.bmp kakis7.bmp
+	md1 kakis.bmp kakis2.bmp
 
-md1: main.c
-	gcc main.c -o md1
+md1: md1.c image.c image.h
+	gcc md1.c image.c -o md1
