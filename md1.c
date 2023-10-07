@@ -10,7 +10,7 @@ int main(int argc, const char** argv) {
 		printf("  Where 'input' is path to input file and 'output' is path ");
 		printf("to output file.\n");
 		printf("  Input file must be a 24-bit .bmp file with no compression.\n");
-		printf("  Flag -g will output image as grayscale.");
+		printf("  Flag -g will output image as grayscale.\n");
 		
 		return -1;
 	}
