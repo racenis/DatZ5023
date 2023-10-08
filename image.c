@@ -21,6 +21,22 @@ void FillImage(Image img, Pixel pix) {
 	}
 }
 
+Image ResizeImage(Image img, int width, int height) {
+	Image res = NewImage(width, height);
+	
+	for (int y = 0; y < res.height; y++) {
+		for (int x = 0; x < res.width; x++) {
+			if (x < img.width && y < img.height) {
+				res.data[res.width * y + x] = img.data[img.width * y + x];
+			} else {
+				res.data[res.width * y + x] = COLOR_BLACK;
+			}
+		}
+	}
+	
+	return res;
+}
+
 Image NewImage(int width, int height) {
 	Image img;
 	
@@ -81,15 +97,11 @@ Image LoadImageFromFile(const char* path) {
 		printf("Expected 0 compression, instead got %i\n", header.compression);
 	}
 	
-	printf("Image size: %ix%i\n", header.width, header.height);
-	
 	image.width = header.width;
 	image.height = header.height;
 	
 	char* bmp_data = malloc(header.image_size);
 	fread(bmp_data, sizeof(char), header.image_size, file);
-	
-	printf("uimage size: %i\n", header.image_size);
 	
 	int image_data_size = image.width * image.height * sizeof(Pixel);
 	image.data = malloc(image_data_size);
@@ -115,8 +127,6 @@ Image LoadImageFromFile(const char* path) {
 			imgln[x].b = scln[x].b;
 		}
 	}
-	
-	printf("scanline padding: %i\n", scln_padding);
 	
 	free(bmp_data);
 

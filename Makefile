@@ -7,5 +7,5 @@ md1: md1.c image.c image.h
 md2: md2.c image.c image.h
 	gcc md2.c image.c -o md2
 	
-md3: md3.c fft.c fft.h
-	gcc md3.c fft.c -o md3
+md3: md3.c image.c image.h fft.c fft.h
+	gcc md3.c image.c fft.c -o md3

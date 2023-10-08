@@ -17,6 +17,7 @@ typedef struct Image {
 Pixel GetPixel(Image img, int x, int y);
 void SetPixel(Image img, Pixel pix, int x, int y);
 void FillImage(Image img, Pixel pix);
+Image ResizeImage(Image img, int width, int height);
 Image NewImage(int width, int height);
 Image LoadImageFromFile(const char* path);
 void SaveImageToFile(const char* path, Image image);
