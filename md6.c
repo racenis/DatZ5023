@@ -6,7 +6,7 @@
 
 int main(int argc, const char** argv) {
 	if (argc != 3) {
-		printf("Usage: md5 input output\n");
+		printf("Usage: md6 input output\n");
 		printf("  Where 'input' is path to input file and 'output' is path ");
 		printf("to output file.\n");
 		printf("  Input file must be a 24-bit .bmp file with no compression.\n");

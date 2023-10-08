@@ -52,6 +52,8 @@ md6 --help
 
 ![Kaķis stūrī krīt.](/amizanti/kakissturiskrit.png)
 
-![Spirkts kaķis.](/amizanti/spirktskakis.png)
-
 ![Kaķis zils.](/amizanti/kakiszils.png)
+
+![Kaķis neizdevies.](/amizanti/kakisneizdevies.png)
+
+![Varde.](/amizanti/varde.png)
