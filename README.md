@@ -11,17 +11,32 @@
 ###### MD1: "Realizēt histogrammas vienmērīgošanas algoritmu"
 ```
 make md1 
-md1 --help```
+md1 --help
+```
 
 ###### MD2: "Realizēt izpludināšanu ar Gausa filtru"
 ```
 make md2 
-md2 --help```
+md2 --help
+```
 
 ###### MD3: "Realizēt filtrēšanu ar Furjē transformācijas palīdzību"
 ```
 make md3 
-md3 --help```
+md3 --help
+```
+
+###### MD5: "Izstrādāt programmu, kas doto attēlu palielina 4 reizes, lietojot bilineāro (vai bikubisko) interpolāciju"
+```
+make md5
+md5 --help
+```
+
+###### MD6: "Realizēt trokšņu novākšanu ar Hāra vilnīšu transformāciju"
+```
+make md6
+md6 --help
+```
 
 ##### Attēli
 

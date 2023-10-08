@@ -4,12 +4,7 @@
 #include <string.h>
 
 #include "image.h"
-
-typedef struct Kernel {
-	int width;
-	int height;
-	float* data;
-} Kernel;
+#include "kernel.h"
 
 Kernel MakeGaussianKernel(float scale, int w, int h) {
 	Kernel k;
@@ -30,16 +25,6 @@ Kernel MakeGaussianKernel(float scale, int w, int h) {
 	}
 	
 	return k;
-}
-
-Pixel GetClampedPixel(Image img, int x, int y) {
-	if (x < 0) x = 0;
-	if (y < 0) y = 0;
-	
-	if (x >= img.width) x = img.width - 1;
-	if (y >= img.height) y = img.height - 1;
-	
-	return GetPixel(img, x, y);
 }
 
 int main(int argc, const char** argv) {
@@ -67,50 +52,10 @@ int main(int argc, const char** argv) {
 	char overlay_kernel = argc != 6 && strcmp(argv[6], "-k") == 0;
 	
 	Image img = LoadImageFromFile(input_path);
-	Image blr = NewImage(img.width, img.height);
 	
 	Kernel k = MakeGaussianKernel(kernel_blur, kernel_width, kernel_height);
 
-	// saskaitām kopā visu kerneli
-	float kernel_sum = 0.0f;
-	int kernel_size = k.width * k.height;
-	for (int i = 0; i < kernel_size; i++) {
-		kernel_sum += k.data[i];
-	}
-	
-	// kerneļa normalizācijas skaitlis
-	float kernel_weight = 1.0f / kernel_sum;
-	
-	// kerneļa konvolūcija ar attēlu
-	for (int y = 0; y < img.height; y++) {
-	for (int x = 0; x < img.width; x++) {
-		float r = 0.0f;
-		float g = 0.0f;
-		float b = 0.0f;
-		
-		for (int ky = 0; ky < k.height; ky++) {
-		for (int kx = 0; kx < k.width; kx++) {
-			int sx = x + kx - (k.width/2);
-			int sy = y + ky - (k.height/2);
-			
-			Pixel pix = GetClampedPixel(img, sx, sy);
-			
-			float kval = k.data[k.width * ky + kx];
-			
-			r += (float)pix.r * kval;
-			g += (float)pix.g * kval;
-			b += (float)pix.b * kval;
-		}}
-		
-		r *= kernel_weight;
-		g *= kernel_weight;
-		b *= kernel_weight;
-		
-		Pixel pix = {r, g, b};
-		
-		SetPixel(blr, pix, x, y);
-	}
-	}
+	Image blr = ConvolveKernel(img, k);
 	
 	// kerneļa uzkopēšana uz izvada attēla (ja nepieciešams)
 	if (overlay_kernel) {

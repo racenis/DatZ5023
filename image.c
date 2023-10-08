@@ -9,6 +9,16 @@ Pixel GetPixel(Image img, int x, int y) {
 	return img.data[img.width * y + x];
 }
 
+Pixel GetClampedPixel(Image img, int x, int y) {
+	if (x < 0) x = 0;
+	if (y < 0) y = 0;
+	
+	if (x >= img.width) x = img.width - 1;
+	if (y >= img.height) y = img.height - 1;
+	
+	return GetPixel(img, x, y);
+}
+
 void SetPixel(Image img, Pixel pix, int x, int y) {
 	img.data[img.width * y + x] = pix;
 }
