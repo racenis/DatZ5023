@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <complex.h>
 #include <math.h>
+#include <stdlib.h>
 
-void fft(float complex* input, float complex* output, int N) {
+static void fft(float complex* input, float complex* output, int N) {
 	if (N == 1) {
 		output[0] = input[0];
 	} else {
@@ -30,7 +31,7 @@ void fft(float complex* input, float complex* output, int N) {
 	}
 }
 
-void invfft(float complex* input, float complex* output, int N) {
+static void invfft(float complex* input, float complex* output, int N) {
 	float complex conjugate[N];
 	float complex transform[N];
 	
@@ -43,6 +44,24 @@ void invfft(float complex* input, float complex* output, int N) {
 	for (int i = 0; i < N; i++) {
 		output[i] = conjf(transform[i]/(float)N);
 	}
+}
+
+void FFT(float complex* input, float complex* output, int N) {
+	if ((N & (N - 1)) != 0) {
+		printf("N must be power of two, instead is %i.", N);
+		abort();
+	}
+	
+	fft(input, output, N);
+}
+
+void InvFFT(float complex* input, float complex* output, int N) {
+	if ((N & (N - 1)) != 0) {
+		printf("N must be power of two, instead is %i.", N);
+		abort();
+	}
+	
+	invfft(input, output, N);
 }
 
 void PrintComplexArray(float complex* array, int size) {
@@ -71,29 +90,3 @@ void PrintComplexArray(float complex* array, int size) {
 	printf("]\n");
 }
 
-int main() {
-	float complex series[8];
-	float complex transformed[8];
-	float complex back_again[8];
-
-	series[0] = 420.0f;
-	series[1] = 69.0f;
-	series[2] = 489.0f;
-	series[3] = 0.0f;
-	series[4] = 0.0f;
-	series[5] = 0.0f;
-	series[6] = 0.0f;
-	series[7] = 0.0f;
-	
-	PrintComplexArray(series, 8);
-	
-	fft(series, transformed, 8);
-	
-	PrintComplexArray(transformed, 8);
-	
-	invfft(transformed, back_again, 8);
-	
-	PrintComplexArray(back_again, 8);
-	
-	return 0;
-}
