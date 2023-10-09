@@ -18,8 +18,8 @@ HSIPixel PixelToHSIPixel(Pixel pix) {
 	float b = (float) pix.b / (float) RGB;
 	
 	float h1 = 0.5f * ((r - g) + (r - b));
-	float h2 = sqrt(((r - g)*(r - g)) + ((r - b)*(g - b)));
-	float h = acos(h1/h2);
+	float h2 = sqrtf(((r - g)*(r - g)) + ((r - b)*(g - b)));
+	float h = acosf(h1/h2);
 	
 	if (b > g) {
 		h = 2.0f * M_PI - h;
@@ -36,59 +36,80 @@ HSIPixel PixelToHSIPixel(Pixel pix) {
 }
 
 Pixel HSIPixelToPixel(HSIPixel pix) {
-	float x = pix.i * (1.0f - pix.s);
-	float y = pix.i * (1.0f + ((pix.s * cos(pix.h))/cos(M_PI/3.0f - pix.h)));
-	float z = (3.0f * pix.i) - (x + y);
+	float h = (pix.h * (180.0f/M_PI)) / 60.0f;
+	float z = 1.0f - fabsf(fmodf(h, 2.0f) - 1.0f);
+	float c = (3.0f * pix.i * pix.s) / (1.0f + z);
+	float x = c * z;
 	
 	Pixel res;
 	
-	if (x < 0.0f) x = 0.0f;
-	if (y < 0.0f) y = 0.0f;
-	if (z < 0.0f) z = 0.0f;
-	
-	if (x > 1.0f) x = 0.0f;
-	if (y > 1.0f) y = 0.0f;
-	if (z > 1.0f) z = 0.0f;
-	
-	if (pix.h < (2.0f * M_PI)/3.0f) {
-		res.b = x * 255.0f;
-		res.r = y * 255.0f;
-		res.g = z * 255.0f;
-	} else if (pix.h < (4.0f * M_PI)/3.0f) {
-		res.r = x * 255.0f;
-		res.g = y * 255.0f;
-		res.b = z * 255.0f;
-	} else {
+	if (h < 1.0f) {
+		res.r = c * 255.0f;
 		res.g = x * 255.0f;
-		res.b = y * 255.0f;
-		res.r = z * 255.0f;
+		res.b = 0;
+	} else if (h < 2.0f) {
+		res.r = x * 255.0f;
+		res.g = c * 255.0f;
+		res.b = 0;
+	} else if (h < 3.0f) {
+		res.r = 0;
+		res.g = c * 255.0f;
+		res.b = x * 255.0f;
+	} else if (h < 4.0f) {
+		res.r = 0;
+		res.g = x * 255.0f;
+		res.b = c * 255.0f;
+	} else if (h < 5.0f) {
+		res.r = x * 255.0f;
+		res.g = 0;
+		res.b = c * 255.0f;
+	} else if (h < 6.0f) {
+		res.r = c * 255.0f;
+		res.g = 0;
+		res.b = x * 255.0f;
+	} else {
+		res.r = 0;
+		res.g = 0;
+		res.b = 0;
 	}
+	
+	float m = pix.i * (1.0f - pix.s);
+	
+	res.r += m * 255.0f;
+	res.g += m * 255.0f;
+	res.b += m * 255.0f;
 	
 	return res;
 }
 
 int main(int argc, const char** argv) {
-	Image img = LoadImageFromFile("kakis.bmp");
-	Image res = NewImage(img.width, img.height);
+	if (argc != 4) {
+		printf("Usage: md8 input output shift\n");
+		printf("  Where 'input' is path to input file and 'output' is path ");
+		printf("to output file, and 'shift' is the hue shift in degrees.\n");
+		printf("  Input file must be a 24-bit .bmp file with no compression.\n");
+		return -1;
+	}
 	
-	float shift = 50.0f;
+	const char* input = argv[1];
+	const char* output = argv[2];
+	
+	float shift = atof(argv[3]);
+	
+	Image img = LoadImageFromFile(input);
+	Image res = NewImage(img.width, img.height);
 	
 	for (int i = 0; i < img.width * img.height; i++) {
 		HSIPixel pix = PixelToHSIPixel(img.data[i]);
 		
 		pix.h += shift * (M_PI/180.0f);
 		
+		pix.h = fmodf(pix.h, 360.0f * (M_PI/180.0f));
+
 		res.data[i] = HSIPixelToPixel(pix);
-		
-		
-		/*if (res.data[i].r == 254 && res.data[i].g == 0 && res.data[i].b == 7) {
-			printf("%i %i %i\n", img.data[i].r, img.data[i].g, img.data[i].b);
-			printf("%f %f %f\n", pix.h, pix.s, pix.i);
-		}*/
-		
 	}
 	
-	SaveImageToFile("kakisbuba.bmp", res);
+	SaveImageToFile(output, res);
 	
 	return 0;
 }

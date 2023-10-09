@@ -1,5 +1,5 @@
-default: md8
-	md8
+default: md10
+	md10
 
 md1: md1.c image.c image.h
 	gcc md1.c image.c -o md1
@@ -18,3 +18,9 @@ md6: md6.c image.c image.h kernel.c kernel.h
 	
 md8: md8.c image.c image.h 
 	gcc md8.c image.c -o md8
+	
+md9: md9.c image.c image.h 
+	gcc md9.c image.c -o md9
+
+md10: md10.c image.c image.h kernel.c kernel.h
+	gcc md10.c image.c kernel.c -o md10

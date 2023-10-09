@@ -10,5 +10,6 @@ typedef struct Kernel {
 } Kernel;
 
 Image ConvolveKernel(Image img, Kernel k);
+Image ConvolveKernelNormalized(Image img, Kernel k);
 
 #endif // KERNEL_H
