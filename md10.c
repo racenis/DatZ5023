@@ -27,7 +27,7 @@ int main(int argc, const char** argv) {
 	
 	if (strcmp(argv[3], "-laplace") == 0) {
 		mode = MODE_LAPLACE;
-	} else if (strcmp(argv[3], "-sobel")) {
+	} else if (strcmp(argv[3], "-sobel") == 0) {
 		mode = MODE_SOBEL;
 	} else {
 		printf("Unrecognized mode: %s\n", argv[3]);

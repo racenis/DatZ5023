@@ -7,6 +7,7 @@
 #include "fft.h"
 #include "image.h"
 
+// Attēls kuram ir uztaisīta Furjē transformācija
 typedef struct ComplexImage {
 	int width;
 	int height;
@@ -16,6 +17,7 @@ typedef struct ComplexImage {
 	float complex* blue_channel;
 } ComplexImage;
 
+// Veic Furjē transformāciju attēlam
 ComplexImage ImageToComplexImage(Image img) {
 	ComplexImage comp;
 	
@@ -82,6 +84,7 @@ ComplexImage ImageToComplexImage(Image img) {
 	return comp;
 }
 
+// Veic inverso Furjē transformāciju attēlam
 Image ComplexImageToImage(ComplexImage comp) {
 	Image img =	NewImage(comp.width, comp.height);
 	
@@ -151,6 +154,7 @@ Image ComplexImageToImage(ComplexImage comp) {
 	return img;
 }
 
+// Vizualizācija Furjē transformētajam attēlam.
 Image ComplexImageExtract(ComplexImage comp) {
 	Image img =	NewImage(comp.width, comp.height);
 
@@ -169,6 +173,7 @@ Image ComplexImageExtract(ComplexImage comp) {
 	return img;
 }
 
+// Veic konvolūciju ar diviem Furjē transformētajiem attēliem
 ComplexImage ComplexImageConvolve(ComplexImage a, ComplexImage b) {
 	ComplexImage img;
 	
@@ -192,6 +197,7 @@ ComplexImage ComplexImageConvolve(ComplexImage a, ComplexImage b) {
 	return img;
 }
 
+// Atrod nākamo ar 2 dalāmo skaitli
 int NextPowerOfTwo(int x) {
 	for (int i = 1;; i = i << 1) {
 		if (i >= x) return i;

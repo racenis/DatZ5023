@@ -5,10 +5,12 @@
 
 #include "image.h"
 
+// Atrod pikseli attēlā
 Pixel GetPixel(Image img, int x, int y) {
 	return img.data[img.width * y + x];
 }
 
+// Atrod pikseli attēlā, bet bez segmentācijas kļūmēm
 Pixel GetClampedPixel(Image img, int x, int y) {
 	if (x < 0) x = 0;
 	if (y < 0) y = 0;
@@ -19,10 +21,12 @@ Pixel GetClampedPixel(Image img, int x, int y) {
 	return GetPixel(img, x, y);
 }
 
+// Iebiksta pikseli attēlā
 void SetPixel(Image img, Pixel pix, int x, int y) {
 	img.data[img.width * y + x] = pix;
 }
 
+// Piepilda attēlu ar krāsu
 void FillImage(Image img, Pixel pix) {
 	for (int y = 0; y < img.height; y++) {
 		for (int x = 0; x < img.width; x++) {
@@ -31,6 +35,7 @@ void FillImage(Image img, Pixel pix) {
 	}
 }
 
+// Pārizmēro (?) attēlu
 Image ResizeImage(Image img, int width, int height) {
 	Image res = NewImage(width, height);
 	
@@ -47,6 +52,7 @@ Image ResizeImage(Image img, int width, int height) {
 	return res;
 }
 
+// Uztaisa jaunu attēlu
 Image NewImage(int width, int height) {
 	Image img;
 	
@@ -143,6 +149,7 @@ Image LoadImageFromFile(const char* path) {
 	return image;
 }
 
+// Saglabā attēlu kā BMP attēlu
 void SaveImageToFile(const char* path, Image image) {
 	FILE* file = fopen(path,"wb");
 	

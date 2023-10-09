@@ -3,6 +3,7 @@
 #include <math.h>
 #include <stdlib.h>
 
+// Cooley-Tukey algoritms
 static void fft(float complex* input, float complex* output, int N) {
 	if (N == 1) {
 		output[0] = input[0];
@@ -31,6 +32,7 @@ static void fft(float complex* input, float complex* output, int N) {
 	}
 }
 
+// Inversais FFT algoritms
 static void invfft(float complex* input, float complex* output, int N) {
 	float complex conjugate[N];
 	float complex transform[N];
@@ -46,6 +48,7 @@ static void invfft(float complex* input, float complex* output, int N) {
 	}
 }
 
+// FFT funckija ar ievada pārbaudi
 void FFT(float complex* input, float complex* output, int N) {
 	if ((N & (N - 1)) != 0) {
 		printf("N must be power of two, instead is %i.", N);
@@ -55,6 +58,7 @@ void FFT(float complex* input, float complex* output, int N) {
 	fft(input, output, N);
 }
 
+// Inversā FFT funkcija ar ievada pārbaudi
 void InvFFT(float complex* input, float complex* output, int N) {
 	if ((N & (N - 1)) != 0) {
 		printf("N must be power of two, instead is %i.", N);
@@ -64,6 +68,7 @@ void InvFFT(float complex* input, float complex* output, int N) {
 	invfft(input, output, N);
 }
 
+// Izdrukukā Furjē transformāciju
 void PrintComplexArray(float complex* array, int size) {
 	printf("[");
 	

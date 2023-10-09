@@ -6,6 +6,7 @@
 #include "image.h"
 #include "kernel.h"
 
+// Uztaisa kerneli ar Gausa sadalījumu
 Kernel MakeGaussianKernel(float scale, int w, int h) {
 	Kernel k;
 	

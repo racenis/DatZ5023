@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <math.h>
 
+// Uztaisa attēla-kerneļa konvolūciju
 Image ConvolveKernel(Image img, Kernel k) {
 	Image blr = NewImage(img.width, img.height);
 
@@ -58,6 +59,7 @@ Image ConvolveKernel(Image img, Kernel k) {
 	return blr;
 }
 
+// Uztaisa kerneļa-attēla konvolūciju, bet nenormalizē kerneli
 Image ConvolveKernelNormalized(Image img, Kernel k) {
 	Image blr = NewImage(img.width, img.height);
 
@@ -74,11 +76,11 @@ Image ConvolveKernelNormalized(Image img, Kernel k) {
 			
 			Pixel pix = GetClampedPixel(img, sx, sy);
 			
-			float kval = k.data[k.width * ky + kx];
+			float val = k.data[k.width * ky + kx];
 			
-			r += (float)pix.r * kval;
-			g += (float)pix.g * kval;
-			b += (float)pix.b * kval;
+			r += (float)pix.r * val;
+			g += (float)pix.g * val;
+			b += (float)pix.b * val;
 		}}
 		
 		r = fabsf(r);

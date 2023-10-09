@@ -3,6 +3,7 @@
 
 #include "image.h"
 
+// Izrēķina vidējās vērtības starp pikseļiem
 Pixel Sample(Pixel pix1, Pixel pix2, int mod) {
 	switch (mod) {
 	case 0:
