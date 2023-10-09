@@ -22,8 +22,8 @@ md3: md3.c image.c image.h fft.c fft.h
 md5: md5.c image.c image.h
 	gcc md5.c image.c -o md5 -static -static-libgcc
 
-md6: md6.c image.c image.h kernel.c kernel.h
-	gcc md6.c image.c kernel.c -o md6 -static -static-libgcc
+md6: md6.c image.c image.h fwt.c fwt.h
+	gcc md6.c image.c fwt.c -o md6 -static -static-libgcc
 	
 md8: md8.c image.c image.h 
 	gcc md8.c image.c -o md8 -static -static-libgcc
