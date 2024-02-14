@@ -38,6 +38,25 @@ make md6
 md6 --help
 ```
 
+###### MD8: "Izstrādāt programmu, kas attēlā nomaina krāsas, izmantojot HSI krāsu modeļa H komponenti"
+```
+make md8
+md8 --help
+```
+
+###### MD9: "Izstrādāt programmu, kas koriģē krāsas no kvēlspuldzes apgaismojuma uz apmākušās dienas gaismu"
+```
+make md9
+md9 --help
+```
+
+###### MD10: "Realizēt Sobela un Laplasa operatorus, pārbaudīt tos attēla robežu noteikšanai"
+```
+make md10
+md10 --help
+```
+
+
 ##### Attēli
 
 ![Gauss kaķis.](/amizanti/gausskakis.png)
@@ -56,4 +75,14 @@ md6 --help
 
 ![Kaķis neizdevies.](/amizanti/kakisneizdevies.png)
 
+![Kaķis buba.](/amizanti/kakisbuba.png)
+
+![Kaķis buba 2.](/amizanti/kakisbuba2.png)
+
+![Kaķis buba 3.](/amizanti/kakisbuba3.png)
+
+![Kaķis attrokšņots.](/amizanti/kakisdenoiz.png)
+
 ![Varde.](/amizanti/varde.png)
+
+![Furjers.](/amizanti/furjers.png)

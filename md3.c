@@ -206,7 +206,7 @@ int NextPowerOfTwo(int x) {
 
 int main(int argc, const char** argv) {
 	if (argc != 4) {
-		printf("Usage: md3 image kernel output [flag]\n");
+		printf("Usage: md3 image kernel output\n");
 		printf("  Where 'input' and 'kernel' are paths to images that will be convolved\n");
 		printf("  together, and 'output' is path to file to which the resulting image will\n");
 		printf("  be written to.\n");

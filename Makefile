@@ -11,25 +11,25 @@ clean:
 	del md10.exe
 
 md1: md1.c image.c image.h
-	gcc md1.c image.c -o md1 -static -static-libgcc
+	gcc md1.c image.c -o md1 -static -static-libgcc -std=c99
 	
 md2: md2.c image.c image.h kernel.c kernel.h
-	gcc md2.c image.c kernel.c -o md2 -static -static-libgcc
+	gcc md2.c image.c kernel.c -o md2 -static -static-libgcc -std=c99
 	
 md3: md3.c image.c image.h fft.c fft.h
-	gcc md3.c image.c fft.c -o md3 -static -static-libgcc
+	gcc md3.c image.c fft.c -o md3 -static -static-libgcc -std=c99
 	
 md5: md5.c image.c image.h
-	gcc md5.c image.c -o md5 -static -static-libgcc
+	gcc md5.c image.c -o md5 -static -static-libgcc -std=c99
 
 md6: md6.c image.c image.h fwt.c fwt.h
-	gcc md6.c image.c fwt.c -o md6 -static -static-libgcc
+	gcc md6.c image.c fwt.c -o md6 -static -static-libgcc -std=c99
 	
 md8: md8.c image.c image.h 
-	gcc md8.c image.c -o md8 -static -static-libgcc
+	gcc md8.c image.c -o md8 -static -static-libgcc -std=c99
 	
 md9: md9.c image.c image.h 
-	gcc md9.c image.c -o md9 -static -static-libgcc
+	gcc md9.c image.c -o md9 -static -static-libgcc -std=c99
 
 md10: md10.c image.c image.h kernel.c kernel.h
-	gcc md10.c image.c kernel.c -o md10 -static -static-libgcc
+	gcc md10.c image.c kernel.c -o md10 -static -static-libgcc -std=c99

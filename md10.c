@@ -14,8 +14,9 @@ int main(int argc, const char** argv) {
 	if (argc != 4) {
 		printf("Usage: md10 input output mode\n");
 		printf("  Where 'input' is path to input file and 'output' is path ");
-		printf("to output file, and 'mode' is the mode of the program.\n");
-		printf("  Mode must be either '-laplace' or '-sobel'. ");
+		printf("to output file, and \n");
+		printf("  'mode' is the mode of the program.\n");
+		printf("  Mode must be either '-laplace' or '-sobel'.\n");
 		printf("  Input file must be a 24-bit .bmp file with no compression.\n");
 		return -1;
 	}
@@ -71,7 +72,6 @@ int main(int argc, const char** argv) {
 		3,
 		sobel_horizontal_weights
 	};
-	
 	
 	Image sobel1 = ConvolveKernelNormalized(img, sobel_vertical);
 	Image sobel2 = ConvolveKernelNormalized(img, sobel_horizontal);

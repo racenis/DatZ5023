@@ -16,8 +16,9 @@ int main(int argc, const char** argv) {
 	if (argc != 4 && argc != 5) {
 		printf("Usage: md6 input output gate [flags]\n");
 		printf("  Where 'input' is path to input file and 'output' is path ");
-		printf("to output file, and gate is a value in range [0.0..1.0].\n");
-		printf("  Optional flag '-s', which skips Haar inverse transform.");
+		printf("to output file, and\n");
+		printf("  'gate' is a value in range [0.0..1.0].\n");
+		printf("  Optional flag '-s', which skips Haar inverse transform.\n");
 		printf("  Input file must be a 24-bit .bmp file with no compression.\n");
 		return -1;
 	}

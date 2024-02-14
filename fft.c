@@ -3,6 +3,8 @@
 #include <math.h>
 #include <stdlib.h>
 
+const float PI = 3.14159265358979;
+
 // Cooley-Tukey algoritms
 static void fft(float complex* input, float complex* output, int N) {
 	if (N == 1) {
@@ -24,7 +26,7 @@ static void fft(float complex* input, float complex* output, int N) {
 		
 		for (int k = 0; k < N/2; k++) {
 			float complex p = even_output[k];
-			float complex q = cexpf(-2.0f * M_PI * I * (float)k/(float)N) * odd_output[k];
+			float complex q = cexpf(-2.0f * PI * I * (float)k/(float)N) * odd_output[k];
 			
 			output[k] = p + q;
 			output[k + N/2] = p - q;

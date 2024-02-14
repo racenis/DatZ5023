@@ -10,6 +10,8 @@ typedef struct HSIPixel {
 	float i;
 } HSIPixel;
 
+const float PI = 3.14159265358979;
+
 HSIPixel PixelToHSIPixel(Pixel pix) {
 	int RGB = pix.r + pix.g + pix.b;
 	
@@ -22,7 +24,7 @@ HSIPixel PixelToHSIPixel(Pixel pix) {
 	float h = acosf(h1/h2);
 	
 	if (b > g) {
-		h = 2.0f * M_PI - h;
+		h = 2.0f * PI - h;
 	}
 	
 	float min_rgb = r < g ? (r < b ? r : b) : (g < b ? g : b);
@@ -36,7 +38,7 @@ HSIPixel PixelToHSIPixel(Pixel pix) {
 }
 
 Pixel HSIPixelToPixel(HSIPixel pix) {
-	float h = (pix.h * (180.0f/M_PI)) / 60.0f;
+	float h = (pix.h * (180.0f/PI)) / 60.0f;
 	float z = 1.0f - fabsf(fmodf(h, 2.0f) - 1.0f);
 	float c = (3.0f * pix.i * pix.s) / (1.0f + z);
 	float x = c * z;
@@ -86,7 +88,8 @@ int main(int argc, const char** argv) {
 	if (argc != 4) {
 		printf("Usage: md8 input output shift\n");
 		printf("  Where 'input' is path to input file and 'output' is path ");
-		printf("to output file, and 'shift' is the hue shift in degrees.\n");
+		printf("to output file, and\n");
+		printf("  'shift' is the hue shift in degrees.\n");
 		printf("  Input file must be a 24-bit .bmp file with no compression.\n");
 		return -1;
 	}
@@ -102,9 +105,9 @@ int main(int argc, const char** argv) {
 	for (int i = 0; i < img.width * img.height; i++) {
 		HSIPixel pix = PixelToHSIPixel(img.data[i]);
 		
-		pix.h += shift * (M_PI/180.0f);
+		pix.h += shift * (PI/180.0f);
 		
-		pix.h = fmodf(pix.h, 360.0f * (M_PI/180.0f));
+		pix.h = fmodf(pix.h, 360.0f * (PI/180.0f));
 
 		res.data[i] = HSIPixelToPixel(pix);
 	}
