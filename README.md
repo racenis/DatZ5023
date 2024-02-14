@@ -73,6 +73,8 @@ md10 --help
 
 ![Kaķis zils.](/amizanti/kakiszils.png)
 
+![Kaķis attrokšņots.](/amizanti/kakisdenoiz.png)
+
 ![Kaķis neizdevies.](/amizanti/kakisneizdevies.png)
 
 ![Kaķis buba.](/amizanti/kakisbuba.png)
@@ -80,8 +82,6 @@ md10 --help
 ![Kaķis buba 2.](/amizanti/kakisbuba2.png)
 
 ![Kaķis buba 3.](/amizanti/kakisbuba3.png)
-
-![Kaķis attrokšņots.](/amizanti/kakisdenoiz.png)
 
 ![Varde.](/amizanti/varde.png)
 
